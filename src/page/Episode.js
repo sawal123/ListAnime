@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 
 function Episode() {
+  const { mal_id } = useParams();
   const [epi, setEpiTodo] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const episode = await fetch(
-          "https://api.jikan.moe/v4/anime/5114/episodes"
+          `https://api.jikan.moe/v4/anime/${mal_id}/episodes`
         );
         if (episode.ok) {
           const epijs = await episode.json();
@@ -20,50 +22,60 @@ function Episode() {
       }
     };
     fetchData();
-  },[]);
+  }, [mal_id]);
 
   console.log(epi);
   return (
     <div>
       <h1>Episode</h1>
-
-      <div className="grid lg:grid-cols-2 grid-cols-1">
-        <img
-          className="rounded-lg border-2"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          src="https://images.unsplash.com/photo-1697163286094-37facc503e83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
-          alt=""
-        />
-
         <div className="p-3">
-          <div className="grid lg:grid-cols-2 grid-cols-1 gap-2">
-            <div
-              className=" p-5 border-2 rounded-md"
-              style={{ height: "auto", minWidth: "200px", maxWidth: "400px" }}
-            >
-              <div className="grid grid-cols-2 gap-2 mb-2">
-                <div>
-                  <h1 className="text-3xl">Title</h1>
-                  <p>Title Japanase</p>
-                </div>
-
-                <a
-                  href="http://"
-                  className="py-5 px-3 lg:mx-6 text-center rounded-md  text-white bg-blue-700"
+          <div className="grid lg:grid-cols-4 grid-cols-1 gap-2">
+            {epi.length > 0 ? (
+              epi.map((item) => (
+                <div
+                  key={item.id}
+                  className=" p-5 border-2 rounded-md"
+                  style={{
+                    height: "auto",
+                    minWidth: "200px",
+                    maxWidth: "400px",
+                  }}
                 >
-                  Eps 01
-                </a>
-              </div>
-              <hr />
-              <ul className="flex mt-1">
-                <li className="mr-5">aired</li>
-                <li className="mr-5">score</li>
-                <li className="mr-5">forum</li>
-              </ul>
-            </div>
+                  <div className="grid grid-cols-2 gap-2 mb-2">
+                    <div>
+                      <h1 className="text-xl">{item.title}</h1>
+                      <p>{item.title_japanese}</p>
+                    </div>
+
+                    <a
+                      href="http://"
+                      className="py-5 px-3 lg:mx-6 text-center rounded-md  text-white bg-blue-700"
+                    >
+                      Eps {item.mal_id}
+                    </a>
+                  </div>
+                  <hr />
+                  <ul className="flex mt-1">
+                    <li className="mr-5">
+                      {new Date(item.aired).toLocaleString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </li>
+                    <li className="mr-5">{item.score}</li>
+                    <li className="mr-5">
+                      <a href={item.forum_url}>Forum</a>
+                    </li>
+                  </ul>
+                </div>
+              ))
+            ) : (
+              <p>Loading</p>
+            )}
           </div>
         </div>
-      </div>
+     
     </div>
   );
 }

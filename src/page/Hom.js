@@ -66,7 +66,7 @@ function Home() {
               </div>
               <div className="my-3">
                 <Link
-                  to={"episode"}
+                  to={"episode/"+ item.mal_id}
                   className="px-3 py-2 bg-blue-700 text-white rounded-md my-1"
                 >
                   View
