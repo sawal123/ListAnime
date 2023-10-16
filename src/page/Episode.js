@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 function Episode() {
   const { mal_id } = useParams();
+  const { title } = useParams();
   const [epi, setEpiTodo] = useState([]);
 
   useEffect(() => {
@@ -22,12 +23,14 @@ function Episode() {
       }
     };
     fetchData();
-  }, [mal_id]);
+  }, [mal_id, title]);
 
   console.log(epi);
   return (
     <div>
-      <h1>Episode</h1>
+      <div className="px-3 my-5">
+      <h1 className="text-3xl">{title}</h1>
+      </div>
         <div className="p-3">
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-2">
             {epi.length > 0 ? (
@@ -41,7 +44,7 @@ function Episode() {
                     maxWidth: "400px",
                   }}
                 >
-                  <div className="grid grid-cols-2 gap-2 mb-2">
+                  <div className=" grid-cols-2 gap-2 mb-2 flex justify-between">
                     <div>
                       <h1 className="text-xl">{item.title}</h1>
                       <p>{item.title_japanese}</p>
@@ -49,7 +52,7 @@ function Episode() {
 
                     <a
                       href="http://"
-                      className="py-5 px-3 lg:mx-6 text-center rounded-md  text-white bg-blue-700"
+                      className=" lg:mx-6 text-center rounded-md  text-white bg-blue-700" style={{width: '80px', height: '50px', lineHeight: '50px'}}
                     >
                       Eps {item.mal_id}
                     </a>

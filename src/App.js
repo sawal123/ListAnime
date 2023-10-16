@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />}></Route>
-            <Route path="episode/:mal_i" element={<Episode />}></Route>
+            <Route path="episode/:mal_id/:title" element={<Episode />}></Route>
             <Route path="/*" element={<NoPage />}></Route>
           </Route>
         </Routes>

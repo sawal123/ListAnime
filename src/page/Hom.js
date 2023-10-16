@@ -60,13 +60,13 @@ function Home() {
                 src={item.images.jpg.image_url}
               />
               <div className="mt-3">
-                <div className="text-left">{item.title}</div>
+                <div className="text-left text-xl font-bold">{item.title}</div>
                 <div className="text-left">{item.source}</div>
-                <div className="text-left">{item.episodes}</div>
+                <div className="text-left">Episode : {item.episodes}</div>
               </div>
               <div className="my-3">
                 <Link
-                  to={"episode/"+ item.mal_id}
+                  to={"episode/"+ item.mal_id + "/" + item.title}
                   className="px-3 py-2 bg-blue-700 text-white rounded-md my-1"
                 >
                   View
