@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import { Route } from 'react-router-dom';
 
 
-import About from './page/About';
+// import About from './page/About';
+import List from './page/List';
 import Layout from './page/Nav';
 import Home from './page/Hom';
 import NoPage from './page/NoPage';
@@ -17,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="about" element={<About />}></Route>
+            <Route path="/list" element={<List />}></Route>
             <Route path="episode/:mal_id/:title" element={<Episode />}></Route>
             <Route path="/*" element={<NoPage />}></Route>
           </Route>

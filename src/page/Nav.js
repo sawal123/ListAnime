@@ -8,10 +8,10 @@ function Layout() {
       <nav className="bg-blue-700 ">
         <ul className="flex flex-row justify-center py-5 text-white">
           <li>
-            <Link to="/" className={margin}>Home</Link>
+            <Link to="/" className={margin}>Top Anime</Link>
           </li>
           <li>
-            <Link to="/About" className={margin}>About</Link>
+            <Link to="/list" className={margin}>List Anime</Link>
           </li>
           <li>
             <Link to="/contact" className={margin}>Contact</Link>
