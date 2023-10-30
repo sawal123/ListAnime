@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import YouTube from "react-youtube";
 
 function Episode() {
   const { mal_id } = useParams();
   const { title } = useParams();
   const [epi, setEpiTodo] = useState([]);
+  const [fulls, setFull] = useState([]);
+  const [videoId, setVideo] = useState([]);
+  const opts = {
+    playerVars: {
+      autoplay: 0,
+    },
+  };
+  const onReady = (event) => {
+    // Handle peristiwa pemutar video yang telah siap
+    event.target.playVideo();
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,6 +24,18 @@ function Episode() {
         const episode = await fetch(
           `https://api.jikan.moe/v4/anime/${mal_id}/episodes`
         );
+
+        const full = await fetch(
+          `https://api.jikan.moe/v4/anime/${mal_id}/full`
+        );
+        if (full.ok) {
+          const fullId = await full.json();
+          setFull(fullId.data);
+          setVideo(fullId.data.trailer);
+        } else {
+          console.error("Full Error");
+        }
+
         if (episode.ok) {
           const epijs = await episode.json();
           setEpiTodo(epijs.data);
@@ -28,8 +52,18 @@ function Episode() {
   console.log(epi);
   return (
     <div>
+      <div className="grid lg:grid-cols-2 grid-cols-1  mt-5">
+        <div className="video-container ">
+          <YouTube videoId={videoId.youtube_id} opts={opts} onReady={onReady} />
+        </div>
+        <div className="border-sm px-5">
+          <h1 className="text-3xl mb-4">{title}</h1>
+          <h2 className="font-bold">Synopsis</h2>
+          <p>{fulls.synopsis}</p>
+        </div>
+      </div>
       <div className="px-3 my-5">
-        <h1 className="text-3xl">{title}</h1>
+        <hr />
       </div>
       <div className="p-3">
         <div className="grid lg:grid-cols-4 grid-cols-1 gap-2">

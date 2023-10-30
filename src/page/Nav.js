@@ -13,9 +13,7 @@ function Layout() {
           <li>
             <Link to="/list" className={margin}>List Anime</Link>
           </li>
-          <li>
-            <Link to="/contact" className={margin}>Contact</Link>
-          </li>
+        
         </ul>
       </nav>
 
