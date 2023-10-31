@@ -68,7 +68,7 @@ function Episode() {
       <div className="p-3">
         <div className="grid lg:grid-cols-4 grid-cols-1 gap-2">
           {epi.length > 0 ? (
-            epi.map((item) => (
+            epi.map((item, index) => (
               <div
                 key={item.id}
                 className=" p-5 border-2 rounded-md"
@@ -78,22 +78,25 @@ function Episode() {
                   maxWidth: "400px",
                 }}
               >
-                <div className=" grid-cols-2 gap-2 mb-2 flex justify-between">
-                  <div>
+                <div className=" grid-cols-2  mb-2 flex justify-between">
+                  <div className="pr-2">
                     <h1 className="text-xl">{item.title}</h1>
                     <p>{item.title_japanese}</p>
                   </div>
 
-                  <button
-                    className=" lg:mx-6 text-center rounded-md  text-white bg-slate-500"
-                    style={{
-                      width: "80px",
-                      height: "50px",
-                      lineHeight: "50px",
-                    }}
-                  >
-                    Eps {item.mal_id}
-                  </button>
+                  <div className="p">
+                    <button
+                      className="  text-center rounded-md  text-white bg-slate-500"
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        // lineHeight: "50px",
+                      }}
+                    >
+                      Eps 
+                      {index + 1}
+                    </button>
+                  </div>
                 </div>
                 <hr />
                 <ul className="flex mt-1">

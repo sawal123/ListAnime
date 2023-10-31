@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function List() {
   const [kar, setKar] = useState([]);
@@ -18,27 +19,39 @@ function List() {
   }, []);
 
   return (
-    <div>
-      <div className="grid lg:grid-cols-6 gap-1">
-        {kar.map((item) => (
-          <div
-            key={item.mal_id}
-            className=" p-5 border-2 rounded-md"
-            style={{
-              height: "auto",
-              minWidth: "200px",
-              maxWidth: "400px",
-            }}
-          >
-            <div className=" grid-cols-2 gap-4 mb-2 flex justify-between">
-              <div>
-                <h1 className="text-xl">{item.entry[0].title}</h1>
-                {/* <p>{item.title_japanese}</p> */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+      {kar.map((item) => (
+        <div className="grid lg:grid-cols-2 gap-2">
+          {item.entry.map((entryItem) => (
+            <div
+              key={entryItem.mal_id}
+              className=" p-5 border-2 rounded-md"
+              style={{
+                height: "auto",
+                minWidth: "200px",
+                maxWidth: "400px",
+              }}
+            >
+              <img
+                className="rounded-lg"
+                style={{ objectFit: "cover", width: "100%", height: "300px" }}
+                src={entryItem.images.jpg.image_url}
+                alt=""
+                srcset=""
+              />
+              <div className="grid-cols-2 gap-4 mb-2 flex justify-between">
+                <div>
+                    <h1 className="text-xl my-4">{entryItem.title}</h1>
+                  <Link to={`/episode/${entryItem.mal_id}/${entryItem.title}`} className="px-3 py-2  bg-blue-700 text-white rounded-md my-1">
+                    View
+                  </Link>
+                  {/* <p>{item.entry.jpg.image_url}</p> */}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }

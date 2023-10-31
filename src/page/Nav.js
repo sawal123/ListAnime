@@ -11,7 +11,7 @@ function Layout() {
             <Link to="/" className={margin}>Top Anime</Link>
           </li>
           <li>
-            <Link to="/list" className={margin}>List Anime</Link>
+            <Link to="/list" className={margin}>Rekomendasi Anime</Link>
           </li>
         
         </ul>
